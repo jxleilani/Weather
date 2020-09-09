@@ -17,6 +17,7 @@ nav{
     padding: 20px;
     text-align: center;
     justify-content: center;
+    max-height: 20vh;
 }
 nav form{
     display: inline-block;
@@ -33,7 +34,7 @@ nav input[type="submit"]{
 }
 .search-btn{
     position: relative;
-    top: 2px;
+    top: 1.5px;
     left: -5px;
     padding: 10px;
     border-radius: 0 25px 25px 0;
@@ -49,14 +50,21 @@ nav input[type="submit"]{
     width: 80%;
     margin: 50px auto;
     text-align: center;
-    min-height: 300px;
+    min-height: 35vh;
+}
+.current-box{
+    background: gray;
+    width: 100%;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 5px 5px 10px 10px rgba(0,0,0,.3);
 }
 
 .swiper-slide{
     display: flex;
     flex-direction: column;
     text-align: center;
-    min-height: 300px;
+    min-height: 35vh;
     background: teal;
     padding: 100px;
 }

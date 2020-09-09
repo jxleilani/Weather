@@ -20,9 +20,13 @@
         </nav>
 
         <div class="current-weather">
-            <h1> City</h1>
-            <h2>Timezone</h2>
-            <h2>Weather</h2>
+            <div class="current-box">
+                <h1><span id="today-day">Wednesday</span> <span id="today-date">9/9/2020</span></h1>
+                <h2><span id="city">City</span></h2>
+                <h3><span id="timeZone">Timezone</span></h3>
+                <h3><span id="weather">Weather</span></h3>
+            </div>
+
 
         </div>
 
@@ -67,30 +71,28 @@
             </div>
      
         </div>
-
-        <!-- Swiper JS -->
+        <!-- Swiper End -->
 
     </div>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-    <!-- Initialize Swiper -->
     <script>
         var swiper = new Swiper('.swiper-container', {
             slidesPerView: 1,
             spaceBetween: 30,
             loop: true,
             pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        }
         });
     </script>
 </body>
