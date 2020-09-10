@@ -5,22 +5,41 @@
 }
 body{
     font-family: sans-serif;
-    background: url("https://cdn.givingcompass.org/wp-content/uploads/2019/12/02081412/Climate-Change-and-the-New-Language-of-Weather-800x450.jpg");
+}
+.container{
+    background: url(cloud.jfif);
     background-size: cover;
     background-repeat: no-repeat;
     background-position-y: top;
     background-position-x: center;
+    padding-bottom: 20px;
+    position: relative;
+    z-index: 1;
 }
+.container::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: .5;
+}
+/* NAV */
 nav{
+    position: relative;
     display: block;
     background: #000;
     padding: 20px;
     text-align: center;
     justify-content: center;
     max-height: 20vh;
+    z-index: 2;
 }
 nav form{
     display: inline-block;
+    z-index: 2;
 }
 nav input[type="text"]{
     padding: 5px 5px 5px 15px;
@@ -42,29 +61,56 @@ nav input[type="submit"]{
     background: rgb(30, 211, 211);
     font-size: 18px;
 }
-/* End Nav */
+/* END NAV*/
 
 .current-weather{
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    margin: 50px auto;
+    position: relative;
+    max-width: 600px;
+    margin: 50px auto 25px;
     text-align: center;
     min-height: 35vh;
+    z-index: 2;
 }
 .current-box{
+    position: relative;
+    display: flex;
+    flex-direction: column;
     background: gray;
     width: 100%;
     border-radius: 20px;
     padding: 20px;
     box-shadow: 5px 5px 10px 10px rgba(0,0,0,.3);
+    z-index: 2;
 }
-
+.icontemp{
+    display: flex;
+    margin: 10px auto;
+}
+.icontemp #icon{
+    margin-right: 10px;
+}
+.icontemp #temperature{
+    margin-right: 5px;
+}
+.feels-like{
+    margin-bottom: 5px;
+}
+.hwuv{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+.swiper-container{
+    padding: 10px;
+    margin: 10px;
+}
 .swiper-slide{
     display: flex;
     flex-direction: column;
     text-align: center;
-    min-height: 35vh;
+    min-height: 30vh;
     background: teal;
     padding: 100px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 10px 10px rgba(0,0,0,.3);
 }

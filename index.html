@@ -21,10 +21,25 @@
 
         <div class="current-weather">
             <div class="current-box">
-                <h1><span id="today-day">Wednesday</span> <span id="today-date">9/9/2020</span></h1>
+                <h1><span id="today-day">Wednesday</span></h1>
+                <h2><span id="today-date">9/9/2020</span></h2>
                 <h2><span id="city">City</span></h2>
-                <h3><span id="timeZone">Timezone</span></h3>
+                <div class="icontemp">
+                    <span id="icon">ICON</span>
+                    <strong><span id="temperature">Temperature</span></strong>
+                    <span>F</span>
+                </div>
+                <div class="feels-like">
+                    <h3>Feels Like</h3>
+                    <strong><span id="feelslike">00</span></strong> F
+
+                </div>
                 <h3><span id="weather">Weather</span></h3>
+                <div class="hwuv">
+                    <div id="humidity">Humidity</div>
+                    <div id="windspeed">Windspeed</div>
+                    <div id="uvindex">UV index</div>
+                </div>
             </div>
 
 
@@ -82,17 +97,13 @@
 
     <script>
         var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 1,
+            slidesPerView: 3,
             spaceBetween: 30,
-            loop: true,
+            freeMode: true,
             pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        }
+                el: '.swiper-pagination',
+                clickable: true,
+            },
         });
     </script>
 </body>
