@@ -5,6 +5,7 @@
 }
 body{
     font-family: sans-serif;
+    background: #000;
 }
 .container{
     background: url(cloud.jfif);
@@ -75,7 +76,7 @@ nav input[type="submit"]{
     position: relative;
     display: flex;
     flex-direction: column;
-    background: gray;
+    background: #fff;
     width: 100%;
     border-radius: 20px;
     padding: 20px;
@@ -94,6 +95,11 @@ nav input[type="submit"]{
 }
 .feels-like{
     margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+}
+#feelslike{
+    margin: 0 5px;
 }
 .hwuv{
     display: flex;
@@ -107,10 +113,11 @@ nav input[type="submit"]{
 .swiper-slide{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     text-align: center;
-    min-height: 30vh;
+    height: 30vh;
     background: teal;
-    padding: 100px;
+    padding: 20px;
     border-radius: 20px;
     box-shadow: 5px 5px 10px 10px rgba(0,0,0,.3);
 }

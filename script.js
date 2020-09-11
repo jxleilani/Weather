@@ -15,6 +15,7 @@ updateDay();
 
 var APIKey = "95d5fa275b00b66c86cd3920c0de76f3";
 var queryURL = "";
+var queryUV ="";
 
 var city = document.getElementById("city");
 var long = 0;
@@ -29,6 +30,10 @@ function getLocation() {
         queryURL = "https://api.openweathermap.org/data/2.5/weather?lat=" +
         lat + "&lon=" + long + "&appid=" + APIKey;
 
+      
+        queryUV = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey +
+        "&lat=" + lat + "&lon=" + long;
+
         $.ajax({
           url: queryURL,
           method: "GET"
@@ -38,7 +43,19 @@ function getLocation() {
           $("#temperature").text(Math.floor((response.main.temp - 273.15) * 1.8 + 32));
           $("#feelslike").text(Math.floor((response.main.feels_like - 273.15) * 1.8 + 32));
           $("#weather").text(response.weather[0].description.toUpperCase());
-      });
+          $("#humidity").text(response.main.humidity);
+          $("#windspeed").text(Math.floor(response.wind.speed * 2.237));
+        });
+
+        $.ajax({
+          url: queryUV,
+          method: "GET"
+        }).then(function(response){
+          $("#uvindex").text(response.value);
+        
+        });
+
+
 
       });
     } else { 

@@ -21,9 +21,9 @@
 
         <div class="current-weather">
             <div class="current-box">
-                <h1><span id="today-day">Wednesday</span></h1>
-                <h2><span id="today-date">9/9/2020</span></h2>
-                <h2><span id="city">City</span></h2>
+                <span id="today-day">Wednesday</span>
+                <span id="today-date">9/9/2020</span>
+                <span id="city">City</span></>
                 <div class="icontemp">
                     <span id="icon">ICON</span>
                     <strong><span id="temperature">Temperature</span></strong>
@@ -36,9 +36,18 @@
                 </div>
                 <h3><span id="weather">Weather</span></h3>
                 <div class="hwuv">
-                    <div id="humidity">Humidity</div>
-                    <div id="windspeed">Windspeed</div>
-                    <div id="uvindex">UV index</div>
+                    <div class="humidity">
+                        <h4>Humidity</h4>
+                        <span id="humidity">Humidity</span><span>%</span>
+                    </div>
+                    <div class="windspeed">
+                        <h4>Windspeed</h4>
+                        <span id="windspeed">Windspeed</span><span> mph</span>
+                    </div>
+                    <div class="uvindex">
+                        <h4>UV Index</h4>
+                        <div id="uvindex">UV index</div>
+                    </div>
                 </div>
             </div>
 
