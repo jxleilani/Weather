@@ -85,7 +85,7 @@ nav input[type="submit"]{
 }
 .icontemp{
     display: flex;
-    margin: 10px auto;
+    margin: 10px auto 5px auto;
 }
 .icontemp #icon{
     margin-right: 10px;
@@ -94,7 +94,7 @@ nav input[type="submit"]{
     margin-right: 5px;
 }
 .feels-like{
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: center;
 }

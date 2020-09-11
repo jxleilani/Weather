@@ -12,7 +12,6 @@ function updateDay(){
 updateDay();
 /* End Display Current Date */
 
-
 var APIKey = "95d5fa275b00b66c86cd3920c0de76f3";
 var queryURL = "";
 var queryUV ="";
@@ -21,6 +20,7 @@ var city = document.getElementById("city");
 var long = 0;
 var lat = 0;
 
+/* Current Location Weather */
 function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position =>{
@@ -29,8 +29,6 @@ function getLocation() {
 
         queryURL = "https://api.openweathermap.org/data/2.5/weather?lat=" +
         lat + "&lon=" + long + "&appid=" + APIKey;
-
-      
         queryUV = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey +
         "&lat=" + lat + "&lon=" + long;
 
@@ -51,21 +49,50 @@ function getLocation() {
           url: queryUV,
           method: "GET"
         }).then(function(response){
-          $("#uvindex").text(response.value);
-        
+          $("#uvindex").text(response.value); 
         });
-
-
 
       });
     } else { 
-      city.innerHTML = "Geolocation is not supported by this browser.";
+      city.innerHTML = "Geolocation not supported by this browser.";
     }
-
-
   }
-  
 
 getLocation();
+/* End Current Location Weather */
+
+/* Search Weather */
+$("#search").on("click", function(){
+  var cityname = $("#searchtext").val();
+  queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&appid=" + APIKey;
+  console.log(queryURL);
+
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(response){
+    console.log(response);
+    city.textContent = response.name;
+    $("#temperature").text(Math.floor((response.main.temp - 273.15) * 1.8 + 32));
+    $("#feelslike").text(Math.floor((response.main.feels_like - 273.15) * 1.8 + 32));
+    $("#weather").text(response.weather[0].description.toUpperCase());
+    $("#humidity").text(response.main.humidity);
+    $("#windspeed").text(Math.floor(response.wind.speed * 2.237));
+
+    lat = response.coord.lat;
+    long = response.coord.lon;
+
+    queryUV = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey +
+    "&lat=" + lat + "&lon=" + long;
+
+    $.ajax({
+      url: queryUV,
+      method: "GET"
+    }).then(function(response){
+      $("#uvindex").text(response.value); 
+    });
+  });
 
 
+});
+/* End Search Weather */
