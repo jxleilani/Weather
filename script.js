@@ -36,8 +36,8 @@ function getLocation() {
           url: queryURL,
           method: "GET"
         }).then(function(response){
-          console.log(response);
-          console.log(queryURL);
+          // console.log(response);
+          // console.log(queryURL);
           city.textContent = response.name;
           $("#icon").html('<img src="http://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png">');
           $("#temperature").text(Math.floor((response.main.temp - 273.15) * 1.8 + 32));
@@ -46,20 +46,21 @@ function getLocation() {
           $("#humidity").text(response.main.humidity);
           $("#windspeed").text(Math.floor(response.wind.speed * 2.237));
         });
-
+        //UV Index
         $.ajax({
           url: queryUV,
           method: "GET"
         }).then(function(response){
           $("#uvindex").text(response.value); 
         });
-
-          $.ajax({
+        //7 Day Forecast
+        $.ajax({
           url: "https://api.openweathermap.org/data/2.5/onecall?lat=42.2&lon=-72.63&exclude=minutely,hourly&appid=95d5fa275b00b66c86cd3920c0de76f3",
           method: "GET"
         }).then(function(response){
           console.log(response);
           for(var i=1; i<=8; i++){
+            $("#slide"+i+" #sliderDate").text(new Date(response.daily[i].dt * 1000).toLocaleDateString("en-US"));
             $("#slide"+i+" #sliderIcon").html('<img src="http://openweathermap.org/img/wn/' + response.daily[i].weather[0].icon + '@2x.png">');
             $("#slide"+i+" #high").text(Math.floor((response.daily[i].temp.max -273.15) * 1.8 +32));
             $("#slide"+i+" #low").text(Math.floor((response.daily[i].temp.min -273.15) * 1.8 +32));
@@ -80,14 +81,13 @@ getLocation();
 $("#search").on("click", function(){
   var cityname = $("#searchtext").val();
   queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&appid=" + APIKey;
-  console.log(queryURL);
 
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response){
-    console.log(response);
-    city.textContent = response.name;
+    // console.log(response);
+    // city.textContent = response.name;
     $("#icon").html('<img src="http://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png">');
     $("#temperature").text(Math.floor((response.main.temp - 273.15) * 1.8 + 32));
     $("#feelslike").text(Math.floor((response.main.feels_like - 273.15) * 1.8 + 32));
@@ -100,12 +100,25 @@ $("#search").on("click", function(){
 
     queryUV = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey +
     "&lat=" + lat + "&lon=" + long;
-
+    //UV Index
     $.ajax({
       url: queryUV,
       method: "GET"
     }).then(function(response){
       $("#uvindex").text(response.value); 
+    });
+
+    //7 Day Forecast
+    $.ajax({
+      url: "https://api.openweathermap.org/data/2.5/onecall?lat=42.2&lon=-72.63&exclude=minutely,hourly&appid=95d5fa275b00b66c86cd3920c0de76f3",
+      method: "GET"
+    }).then(function(response){
+      console.log(response);
+      for(var i=1; i<=8; i++){
+        $("#slide"+i+" #sliderIcon").html('<img src="http://openweathermap.org/img/wn/' + response.daily[i].weather[0].icon + '@2x.png">');
+        $("#slide"+i+" #high").text(Math.floor((response.daily[i].temp.max -273.15) * 1.8 +32));
+        $("#slide"+i+" #low").text(Math.floor((response.daily[i].temp.min -273.15) * 1.8 +32));
+      }
     });
   });
 
