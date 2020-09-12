@@ -60,7 +60,9 @@ function getLocation() {
         }).then(function(response){
           console.log(response);
           for(var i=1; i<=8; i++){
-            $("#slide"+i+" h2").text(Math.floor((response.daily[i].temp.max -273.15) * 1.8 +32));
+            $("#slide"+i+" #sliderIcon").html('<img src="http://openweathermap.org/img/wn/' + response.daily[i].weather[0].icon + '@2x.png">');
+            $("#slide"+i+" #high").text(Math.floor((response.daily[i].temp.max -273.15) * 1.8 +32));
+            $("#slide"+i+" #low").text(Math.floor((response.daily[i].temp.min -273.15) * 1.8 +32));
           }
         });
         
