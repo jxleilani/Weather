@@ -67,7 +67,7 @@ nav input[type="submit"]{
 .current-weather{
     position: relative;
     max-width: 600px;
-    margin: 50px auto 25px;
+    margin: 25px auto;
     text-align: center;
     min-height: 35vh;
     z-index: 2;
@@ -76,22 +76,32 @@ nav input[type="submit"]{
     position: relative;
     display: flex;
     flex-direction: column;
+    margin: 0 10px;
     background: #fff;
-    width: 100%;
     border-radius: 20px;
-    padding: 20px;
-    box-shadow: 5px 5px 10px 10px rgba(0,0,0,.3);
+    padding: 10px;
+    box-shadow: 10px 10px 20px rgba(0,0,0,.9);
     z-index: 2;
+}
+.date{
+    font-size: 20px;
+}
+#city{
+    margin-top: 5px;
+    font-size: 24px;
+    font-weight: 600;
 }
 .icontemp{
     display: flex;
-    margin: 10px auto 5px auto;
+    margin: 0 auto;
+    align-items: center;
 }
 .icontemp #icon{
-    margin-right: 10px;
+    margin: 0;
 }
 .icontemp #temperature{
     margin-right: 5px;
+    font-size: 30px;
 }
 .feels-like{
     margin-bottom: 10px;
@@ -103,11 +113,11 @@ nav input[type="submit"]{
 }
 .hwuv{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     margin-top: 10px;
 }
 .swiper-container{
-    padding: 10px;
+    padding: 0 10px 30px 10px;
     margin: 10px;
 }
 .swiper-slide{
@@ -115,9 +125,10 @@ nav input[type="submit"]{
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    max-width: 260px;
     height: 30vh;
     background: teal;
     padding: 20px;
     border-radius: 20px;
-    box-shadow: 5px 5px 10px 10px rgba(0,0,0,.3);
+    box-shadow: 0 20px 20px -10px #000;
 }

@@ -37,7 +37,9 @@ function getLocation() {
           method: "GET"
         }).then(function(response){
           console.log(response);
+          console.log(queryURL);
           city.textContent = response.name;
+          $("#icon").html('<img src="http://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png">');
           $("#temperature").text(Math.floor((response.main.temp - 273.15) * 1.8 + 32));
           $("#feelslike").text(Math.floor((response.main.feels_like - 273.15) * 1.8 + 32));
           $("#weather").text(response.weather[0].description.toUpperCase());
@@ -51,6 +53,17 @@ function getLocation() {
         }).then(function(response){
           $("#uvindex").text(response.value); 
         });
+
+          $.ajax({
+          url: "https://api.openweathermap.org/data/2.5/onecall?lat=42.2&lon=-72.63&exclude=minutely,hourly&appid=95d5fa275b00b66c86cd3920c0de76f3",
+          method: "GET"
+        }).then(function(response){
+          console.log(response);
+          for(var i=1; i<=8; i++){
+            $("#slide"+i+" h2").text(Math.floor((response.daily[i].temp.max -273.15) * 1.8 +32));
+          }
+        });
+        
 
       });
     } else { 
@@ -73,6 +86,7 @@ $("#search").on("click", function(){
   }).then(function(response){
     console.log(response);
     city.textContent = response.name;
+    $("#icon").html('<img src="http://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png">');
     $("#temperature").text(Math.floor((response.main.temp - 273.15) * 1.8 + 32));
     $("#feelslike").text(Math.floor((response.main.feels_like - 273.15) * 1.8 + 32));
     $("#weather").text(response.weather[0].description.toUpperCase());
