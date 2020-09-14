@@ -239,6 +239,7 @@ a{
             width: 135px !important;
         }
         .search-btn{
-         height: 36px;   
+         height: 36px !important;  
+         padding: 5px; 
         }
     }
