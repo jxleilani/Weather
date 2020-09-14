@@ -230,10 +230,13 @@ a{
     and (device-width: 375px) 
     and (device-height: 812px) 
     and (-webkit-device-pixel-ratio: 3){
+        body{
+            overflow-y: hidden;
+        }
         .swiper-slide{
             width: 135px !important;
         }
         .search-btn{
-         height: 38px;   
+         height: 36px;   
         }
     }
