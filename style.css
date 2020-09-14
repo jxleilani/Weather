@@ -94,10 +94,6 @@ a{
     border-style: none;
     line-height: 30px;
 }
-.nav input[type="submit"],
-.nav-active input[type="submit"]{
-    padding: 10px;
-}
 .search-btn{
     position: relative;
     top: 1.5px;
@@ -236,5 +232,8 @@ a{
     and (-webkit-device-pixel-ratio: 3){
         .swiper-slide{
             width: 135px !important;
+        }
+        .search-btn{
+         height: 38px;   
         }
     }
