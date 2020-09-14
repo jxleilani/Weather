@@ -75,12 +75,13 @@ getLocation();
 
 /* Search Weather */
 $("#search").on("click", function(){
+  $(".nav").toggleClass("nav-active");
+
   var cityname = $("#searchtext").val();
 
   searches.push(cityname);
   storeSearches();
   renderSearches();
-  console.log(searches);
 
   queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&appid=" + APIKey;
 
