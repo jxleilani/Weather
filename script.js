@@ -36,9 +36,8 @@ function getLocation() {
           url: queryURL,
           method: "GET"
         }).then(function(response){
-          // console.log(response);
-          // console.log(queryURL);
           city.textContent = response.name;
+          console.log(response);
           $("#icon").html('<img src="http://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png">');
           $("#temperature").text(Math.floor((response.main.temp - 273.15) * 1.8 + 32));
           $("#feelslike").text(Math.floor((response.main.feels_like - 273.15) * 1.8 + 32));
@@ -55,10 +54,9 @@ function getLocation() {
         });
         //7 Day Forecast
         $.ajax({
-          url: "https://api.openweathermap.org/data/2.5/onecall?lat=42.2&lon=-72.63&exclude=minutely,hourly&appid=95d5fa275b00b66c86cd3920c0de76f3",
+          url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + long + "&exclude=minutely,hourly&appid=95d5fa275b00b66c86cd3920c0de76f3",
           method: "GET"
         }).then(function(response){
-          console.log(response);
           for(var i=1; i<=8; i++){
             $("#slide"+i+" #sliderDate").text(new Date(response.daily[i].dt * 1000).toLocaleDateString("en-US"));
             $("#slide"+i+" #sliderIcon").html('<img src="http://openweathermap.org/img/wn/' + response.daily[i].weather[0].icon + '@2x.png">');
@@ -66,8 +64,6 @@ function getLocation() {
             $("#slide"+i+" #low").text(Math.floor((response.daily[i].temp.min -273.15) * 1.8 +32));
           }
         });
-        
-
       });
     } else { 
       city.innerHTML = "Geolocation not supported by this browser.";
@@ -80,14 +76,19 @@ getLocation();
 /* Search Weather */
 $("#search").on("click", function(){
   var cityname = $("#searchtext").val();
+
+  searches.push(cityname);
+  storeSearches();
+  renderSearches();
+  console.log(searches);
+
   queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&appid=" + APIKey;
 
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response){
-    // console.log(response);
-    // city.textContent = response.name;
+    city.textContent = response.name;
     $("#icon").html('<img src="http://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png">');
     $("#temperature").text(Math.floor((response.main.temp - 273.15) * 1.8 + 32));
     $("#feelslike").text(Math.floor((response.main.feels_like - 273.15) * 1.8 + 32));
@@ -97,23 +98,20 @@ $("#search").on("click", function(){
 
     lat = response.coord.lat;
     long = response.coord.lon;
-
     queryUV = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey +
     "&lat=" + lat + "&lon=" + long;
-    //UV Index
+    //UV Index Search
     $.ajax({
       url: queryUV,
       method: "GET"
     }).then(function(response){
       $("#uvindex").text(response.value); 
     });
-
-    //7 Day Forecast
+    //7 Day Forecast Search
     $.ajax({
-      url: "https://api.openweathermap.org/data/2.5/onecall?lat=42.2&lon=-72.63&exclude=minutely,hourly&appid=95d5fa275b00b66c86cd3920c0de76f3",
+      url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + long + "&exclude=minutely,hourly&appid=95d5fa275b00b66c86cd3920c0de76f3",
       method: "GET"
     }).then(function(response){
-      console.log(response);
       for(var i=1; i<=8; i++){
         $("#slide"+i+" #sliderIcon").html('<img src="http://openweathermap.org/img/wn/' + response.daily[i].weather[0].icon + '@2x.png">');
         $("#slide"+i+" #high").text(Math.floor((response.daily[i].temp.max -273.15) * 1.8 +32));
@@ -121,7 +119,78 @@ $("#search").on("click", function(){
       }
     });
   });
+});
 
+/* click on previously searched cities, not working ? */
+$(".atag").on("click", function(){
+  console.log("worked");
+  var cityname = $(this).val();
+  
 
+  queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&appid=" + APIKey;
+
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(response){
+    city.textContent = response.name;
+    $("#icon").html('<img src="http://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png">');
+    $("#temperature").text(Math.floor((response.main.temp - 273.15) * 1.8 + 32));
+    $("#feelslike").text(Math.floor((response.main.feels_like - 273.15) * 1.8 + 32));
+    $("#weather").text(response.weather[0].description.toUpperCase());
+    $("#humidity").text(response.main.humidity);
+    $("#windspeed").text(Math.floor(response.wind.speed * 2.237));
+
+    lat = response.coord.lat;
+    long = response.coord.lon;
+    queryUV = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey +
+    "&lat=" + lat + "&lon=" + long;
+    //UV Index Search
+    $.ajax({
+      url: queryUV,
+      method: "GET"
+    }).then(function(response){
+      $("#uvindex").text(response.value); 
+    });
+    //7 Day Forecast Search
+    $.ajax({
+      url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + long + "&exclude=minutely,hourly&appid=95d5fa275b00b66c86cd3920c0de76f3",
+      method: "GET"
+    }).then(function(response){
+      for(var i=1; i<=8; i++){
+        $("#slide"+i+" #sliderIcon").html('<img src="http://openweathermap.org/img/wn/' + response.daily[i].weather[0].icon + '@2x.png">');
+        $("#slide"+i+" #high").text(Math.floor((response.daily[i].temp.max -273.15) * 1.8 +32));
+        $("#slide"+i+" #low").text(Math.floor((response.daily[i].temp.min -273.15) * 1.8 +32));
+      }
+    });
+  });
 });
 /* End Search Weather */
+
+/* Local Storage*/
+var searches = [];
+function renderSearches(){
+  $(".search-list").html("");
+  for(var i=0; i<searches.length; i++){
+    var search = searches[i];
+    $(".search-list").append($("<li>").attr("class", "link").append($("<a>").attr("class", "atag").text(search)));
+  }
+}
+function storeSearches(){
+  localStorage.setItem("searches", JSON.stringify(searches));
+}
+function init(){
+  var storedSearch = JSON.parse(localStorage.getItem("searches"));
+  if(storedSearch !== null){
+    searches = storedSearch;
+  }
+  renderSearches();
+}
+init();
+/* End Local Storage */
+
+/* Nav Transition*/
+  $(".burger").on("click", ()=>{
+      $(".nav").toggleClass("nav-active");
+  });
+
