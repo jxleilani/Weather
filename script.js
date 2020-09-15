@@ -37,7 +37,6 @@ function getLocation() {
           method: "GET"
         }).then(function(response){
           city.textContent = response.name;
-          console.log(response);
           $("#icon").html('<img src="http://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png">');
           $("#temperature").text(Math.floor((response.main.temp - 273.15) * 1.8 + 32));
           $("#feelslike").text(Math.floor((response.main.feels_like - 273.15) * 1.8 + 32));
@@ -121,12 +120,11 @@ $("#search").on("click", function(){
     });
   });
 });
+/* End Search Weather */
 
-/* click on previously searched cities, not working ? */
-$(".atag").on("click", function(){
-  console.log("worked");
-  var cityname = $(this).val();
-  
+/* Previous Search Weather*/
+$(document).on("click", ".atag", function(){
+  var cityname = $(this).text();
 
   queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&appid=" + APIKey;
 
@@ -166,7 +164,7 @@ $(".atag").on("click", function(){
     });
   });
 });
-/* End Search Weather */
+/* End Previous Search Weather */
 
 /* Local Storage*/
 var searches = [];
