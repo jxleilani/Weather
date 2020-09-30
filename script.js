@@ -123,7 +123,7 @@ $("#search").on("click", function(){
 
 // Or hit enter key
 $("#searchtext").keypress(function(e){
-  if (e.key === "Enter"){
+  if (e.which === 13){
   $(".nav").toggleClass("nav-active");
 
   var cityname = $("#searchtext").val();
