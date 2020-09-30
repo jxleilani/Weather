@@ -80,8 +80,8 @@ a{
     transform: translateX(0%);
     z-index: 3;
 }
-.nav form,
-.nav-active form{
+.nav .form,
+.nav-active .form{
     display: inline-block;
     height: 50px;
     z-index: 2;

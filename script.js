@@ -29,7 +29,7 @@ function getLocation() {
 
         queryURL = "https://api.openweathermap.org/data/2.5/weather?lat=" +
         lat + "&lon=" + long + "&appid=" + APIKey;
-        queryUV = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey +
+        queryUV = "https://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey +
         "&lat=" + lat + "&lon=" + long;
 
         $.ajax({
@@ -37,7 +37,7 @@ function getLocation() {
           method: "GET"
         }).then(function(response){
           city.textContent = response.name;
-          $("#icon").html('<img src="http://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png">');
+          $("#icon").html('<img src="https://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png">');
           $("#temperature").text(Math.floor((response.main.temp - 273.15) * 1.8 + 32));
           $("#feelslike").text(Math.floor((response.main.feels_like - 273.15) * 1.8 + 32));
           $("#weather").text(response.weather[0].description.toUpperCase());
@@ -58,7 +58,7 @@ function getLocation() {
         }).then(function(response){
           for(var i=1; i<=8; i++){
             $("#slide"+i+" #sliderDate").text(new Date(response.daily[i].dt * 1000).toLocaleDateString("en-US"));
-            $("#slide"+i+" #sliderIcon").html('<img src="http://openweathermap.org/img/wn/' + response.daily[i].weather[0].icon + '@2x.png">');
+            $("#slide"+i+" #sliderIcon").html('<img src="https://openweathermap.org/img/wn/' + response.daily[i].weather[0].icon + '@2x.png">');
             $("#slide"+i+" #high").text(Math.floor((response.daily[i].temp.max -273.15) * 1.8 +32));
             $("#slide"+i+" #low").text(Math.floor((response.daily[i].temp.min -273.15) * 1.8 +32));
           }
@@ -89,7 +89,7 @@ $("#search").on("click", function(){
     method: "GET"
   }).then(function(response){
     city.textContent = response.name;
-    $("#icon").html('<img src="http://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png">');
+    $("#icon").html('<img src="https://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png">');
     $("#temperature").text(Math.floor((response.main.temp - 273.15) * 1.8 + 32));
     $("#feelslike").text(Math.floor((response.main.feels_like - 273.15) * 1.8 + 32));
     $("#weather").text(response.weather[0].description.toUpperCase());
@@ -98,7 +98,7 @@ $("#search").on("click", function(){
 
     lat = response.coord.lat;
     long = response.coord.lon;
-    queryUV = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey +
+    queryUV = "https://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey +
     "&lat=" + lat + "&lon=" + long;
     //UV Index Search
     $.ajax({
@@ -113,7 +113,7 @@ $("#search").on("click", function(){
       method: "GET"
     }).then(function(response){
       for(var i=1; i<=8; i++){
-        $("#slide"+i+" #sliderIcon").html('<img src="http://openweathermap.org/img/wn/' + response.daily[i].weather[0].icon + '@2x.png">');
+        $("#slide"+i+" #sliderIcon").html('<img src="https://openweathermap.org/img/wn/' + response.daily[i].weather[0].icon + '@2x.png">');
         $("#slide"+i+" #high").text(Math.floor((response.daily[i].temp.max -273.15) * 1.8 +32));
         $("#slide"+i+" #low").text(Math.floor((response.daily[i].temp.min -273.15) * 1.8 +32));
       }
@@ -133,7 +133,7 @@ $(document).on("click", ".atag", function(){
     method: "GET"
   }).then(function(response){
     city.textContent = response.name;
-    $("#icon").html('<img src="http://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png">');
+    $("#icon").html('<img src="https://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png">');
     $("#temperature").text(Math.floor((response.main.temp - 273.15) * 1.8 + 32));
     $("#feelslike").text(Math.floor((response.main.feels_like - 273.15) * 1.8 + 32));
     $("#weather").text(response.weather[0].description.toUpperCase());
@@ -142,7 +142,7 @@ $(document).on("click", ".atag", function(){
 
     lat = response.coord.lat;
     long = response.coord.lon;
-    queryUV = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey +
+    queryUV = "https://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey +
     "&lat=" + lat + "&lon=" + long;
     //UV Index Search
     $.ajax({
@@ -157,12 +157,13 @@ $(document).on("click", ".atag", function(){
       method: "GET"
     }).then(function(response){
       for(var i=1; i<=8; i++){
-        $("#slide"+i+" #sliderIcon").html('<img src="http://openweathermap.org/img/wn/' + response.daily[i].weather[0].icon + '@2x.png">');
+        $("#slide"+i+" #sliderIcon").html('<img src="https://openweathermap.org/img/wn/' + response.daily[i].weather[0].icon + '@2x.png">');
         $("#slide"+i+" #high").text(Math.floor((response.daily[i].temp.max -273.15) * 1.8 +32));
         $("#slide"+i+" #low").text(Math.floor((response.daily[i].temp.min -273.15) * 1.8 +32));
       }
     });
   });
+  $(".nav").toggleClass("nav-active");
 });
 /* End Previous Search Weather */
 
