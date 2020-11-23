@@ -18,4 +18,4 @@ Click and drag to scroll through the 7 day forecast.
 * CSS
 
 ### Notes
-Geolocation currently not supported by Safari.
+Geolocation not currently supported by Safari.
