@@ -14,3 +14,6 @@ URL: https://jxleilani.github.io/Weather/
 * jQuery
 * HTML
 * CSS
+
+### Notes
+Geolocation currently not supported by Safari.
